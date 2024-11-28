@@ -30,6 +30,11 @@ export function App() {
     }
   }
 
+  const handleRemoveAll = () => {
+    setIngredients([])
+    console.log("Removed all ingredients")
+  }
+
   const generateRecipe = async () => {
     const now = Date.now();
     if (lastRequestTime && now - lastRequestTime < 30000) {
@@ -90,7 +95,7 @@ export function App() {
         <IngredientsForm onAdd={handleAddIngredient} />
         {ingredients.length > 0 && (
           <>
-            <IngredientsList ingredients={ingredients} onRemove={handleRemoveIngredient} />
+            <IngredientsList ingredients={ingredients} onRemove={handleRemoveIngredient} removeAll = {handleRemoveAll} />
             <RecipeSuggestion generateRecipie={generateRecipe} />
             {recipe && <Recipe recipe = {recipe}/>}
           </>
