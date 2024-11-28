@@ -22,6 +22,7 @@ export function App() {
     if (ingredientToRemove) {
       setIngredients(ingredients.filter((i) => i.id !== id))
       console.log(`Removed ${ingredientToRemove.name}`)
+      setRecipe(null)
     } else {
       console.log(`Ingredient with id ${id} not found`)
     }
