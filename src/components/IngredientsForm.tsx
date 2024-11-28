@@ -21,7 +21,7 @@ export function IngredientsForm({ onAdd }: IngredientProps){
       
     const handleSubmit = (e: React.FormEvent) =>{
         e.preventDefault()
-        if (ingredient.trim() && ingredient.match(/^[A-Za-z]+$/)) {
+        if (ingredient.trim() && ingredient.match(/^[A-Za-z ]+$/)) {
             const newIngredient: Ingredient = {
                 name: ingredient,
                 id: generateRandomString(10)
@@ -29,6 +29,9 @@ export function IngredientsForm({ onAdd }: IngredientProps){
             console.log("Ingredient added:", newIngredient);
             onAdd(newIngredient)
             setIngredient("")
+        }
+        else{
+            alert("Please enter a valid ingredient name")
         }
     } 
     return (
