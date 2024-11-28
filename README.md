@@ -1,50 +1,59 @@
-# React + TypeScript + Vite
+# DishCraft 🍳
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+DishCraft is a simple and intuitive web application that generates recipe suggestions based on the ingredients you have on hand. Built with React and powered by the Gemini API, it helps users create delicious meals without the need to search through countless recipes online.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Ingredient Management:**  Easily add or remove ingredients you have at home.
+- **Recipe Suggestions:** Get tailored recipes instantly based on your available ingredients.
+- **Easy-to-Follow Instructions:** Each recipe includes clear preparation steps and cooking tips.
+- **User-Friendly Interface:** Clean, responsive design for an effortless experience.
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Frontend:** React.js
+- **API:** Gemini API for recipe generation
+- **Styling:** Tailwind CSS
+- **State Management:** React's built-in state handling
 
-- Configure the top-level `parserOptions` property like this:
+## Getting Started
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+**Prerequisites**
+
+Before running this project, ensure you have the following installed:
+
+- Node.js (v16+)
+- npm or yarn
+- Gemini API key (obtain from the Gemini platform)
+
+**Installation**
+
+1. Clone the repository:
+```bash
+git clone https://github.com/TheGhossst/DishCraft
+```
+2. Navigate to the project directory
+```bash
+cd DishCraft
+```
+3. Install dependencies:
+```bash
+npm i
+```
+4. Create an .env file under Dishcraft directory and add your Gemini API key:
+```md
+VITE_GEMINI_API_KEY=YOUR_API_KEY
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+5. Start the development server:
+```bash
+npm run dev
 ```
+
+The application will be available at http://localhost:5173.
+
+# Usage
+
+1. **Add Ingredients:** Enter ingredients you have in the search bar and click "Add Ingredient."
+2. **Generate Recipes:** Click the "Get a recipe" button to fetch a recipe suggestion based on the entered ingredients.
+3. **Cook Your Meal:** Follow the provided step-by-step instructions and enjoy!
