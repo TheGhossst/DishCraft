@@ -3,6 +3,7 @@ import { NavBar } from "./components/NavBar"
 import { IngredientsForm } from './components/IngredientsForm'
 import { Ingredient } from './types/Ingredients'
 import { IngredientsList } from './components/IngredientsList'
+import { RecipeSuggestion } from './components/RecipeSuggestion'
 
 export function App() {
   const [ingredients, setIngredients] = useState<Ingredient[]>([])
@@ -29,6 +30,7 @@ export function App() {
         {ingredients.length > 0 && (
           <>
             <IngredientsList ingredients={ingredients} onRemove={handleRemoveIngredient} />
+            <RecipeSuggestion />
           </>
         )}
       </main>
