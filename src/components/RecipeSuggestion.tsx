@@ -1,21 +1,21 @@
-import { useState } from "react";
+import { useState } from "react"
 
 interface RecipeSuggestionProps {
-    generateRecipie: () => Promise<void>;
+    generateRecipie: () => Promise<void>
 }
   
 
 export function RecipeSuggestion({generateRecipie}: RecipeSuggestionProps) {
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleGenerateRecipe = async () => {
         setIsLoading(true);
         try {
-            await generateRecipie();
+            await generateRecipie()
         } catch (error) {
-            console.error('Recipe generation failed', error);
+            console.error('Recipe generation failed', error)
         } finally {
-            setIsLoading(false);
+            setIsLoading(false)
         }
     };
 

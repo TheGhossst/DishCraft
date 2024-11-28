@@ -1,46 +1,40 @@
-import { useState } from 'react';
-import { NavBar } from "./components/NavBar";
-import { IngredientsForm } from './components/IngredientsForm';
-import { Ingredient } from './types/Ingredients';
-import { IngredientsList } from './components/IngredientsList';
-import { RecipeSuggestion } from './components/RecipeSuggestion';
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { useState } from 'react'
+import { NavBar } from "./components/NavBar"
+import { IngredientsForm } from './components/IngredientsForm'
+import { Ingredient } from './types/Ingredients'
+import { IngredientsList } from './components/IngredientsList'
+import { RecipeSuggestion } from './components/RecipeSuggestion'
+import { GoogleGenerativeAI } from "@google/generative-ai"
+import { RecipeResponse } from './types/recipie'
+import { Recipe } from './components/Recipe'
 
-interface RecipeResponse {
-  name: string;
-  ingredients: string[];
-  steps: string[];
-  difficulty: 'Easy' | 'Medium' | 'Hard';
-  preparationTime: string;
-  cookingTime: string;
-}
 
 export function App() {
-  const [ingredients, setIngredients] = useState<Ingredient[]>([]);
-  const [recipe, setRecipe] = useState<RecipeResponse | null>(null);
+  const [ingredients, setIngredients] = useState<Ingredient[]>([])
+  const [recipe, setRecipe] = useState<RecipeResponse | null>(null)
 
   const handleAddIngredient = (ingredient: Ingredient) => {
-    setIngredients([...ingredients, ingredient]);
-  };
+    setIngredients([...ingredients, ingredient])
+  }
 
   const handleRemoveIngredient = (id: string) => {
-    const ingredientToRemove = ingredients.find((i) => i.id === id);
+    const ingredientToRemove = ingredients.find((i) => i.id === id)
     if (ingredientToRemove) {
-      setIngredients(ingredients.filter((i) => i.id !== id));
-      console.log(`Removed ${ingredientToRemove.name}`);
+      setIngredients(ingredients.filter((i) => i.id !== id))
+      console.log(`Removed ${ingredientToRemove.name}`)
     } else {
-      console.log(`Ingredient with id ${id} not found`);
+      console.log(`Ingredient with id ${id} not found`)
     }
-  };
+  }
 
   const generateRecipe = async () => {
-    const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
+    const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY)
 
     try {
       const model = genAI.getGenerativeModel({
         model: "gemini-1.5-flash-8b",
-      });
-      const ingredientNames = ingredients.map(ingredient => ingredient.name);
+      })
+      const ingredientNames = ingredients.map(ingredient => ingredient.name)
 
       const prompt = `Generate a recipe using these ingredients: ${ingredientNames.join(', ')}.
       Provide:
@@ -59,24 +53,24 @@ export function App() {
         "difficulty": "Easy" | "Medium" | "Hard",
         "preparationTime": string,
         "cookingTime": string
-      }`;
+      }`
 
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      const text = response.text();
+      const result = await model.generateContent(prompt)
+      const response = await result.response
+      const text = response.text()
 
-      const cleanedText = text.trim().replace(/`/g, '').replace(/^json\s*[{]/, '{');
+      const cleanedText = text.trim().replace(/`/g, '').replace(/^json\s*[{]/, '{')
       console.log(cleanedText)
 
       try {
-        const generatedRecipe: RecipeResponse = JSON.parse(cleanedText);
-        setRecipe(generatedRecipe);
+        const generatedRecipe: RecipeResponse = JSON.parse(cleanedText)
+        setRecipe(generatedRecipe)
         console.log(recipe)
       } catch (error) {
-        console.error('Error parsing recipe response:', error);
+        console.error('Error parsing recipe response:', error)
       }
     } catch (error) {
-      console.error('Error generating recipe:', error);
+      console.error('Error generating recipe:', error)
     }
   }
 
@@ -89,9 +83,10 @@ export function App() {
           <>
             <IngredientsList ingredients={ingredients} onRemove={handleRemoveIngredient} />
             <RecipeSuggestion generateRecipie={generateRecipe} />
+            {recipe && <Recipe recipe = {recipe}/>}
           </>
         )}
       </main>
     </div>
-  );
+  )
 }

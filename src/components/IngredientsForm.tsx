@@ -10,13 +10,13 @@ export function IngredientsForm({ onAdd }: IngredientProps){
     const [ingredient, setIngredient] = useState("")
 
     function generateRandomString(length = 8) {
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let result = '';
-        const charactersLength = characters.length;
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+        let result = ''
+        const charactersLength = characters.length
         for (let i = 0; i < length; i++) {
-          result += characters.charAt(Math.floor(Math.random() * charactersLength));
+          result += characters.charAt(Math.floor(Math.random() * charactersLength))
         }
-        return result;
+        return result
     }
       
     const handleSubmit = (e: React.FormEvent) =>{
@@ -26,7 +26,7 @@ export function IngredientsForm({ onAdd }: IngredientProps){
                 name: ingredient,
                 id: generateRandomString(10)
             };
-            console.log("Ingredient added:", newIngredient);
+            console.log("Ingredient added:", newIngredient)
             onAdd(newIngredient)
             setIngredient("")
         }

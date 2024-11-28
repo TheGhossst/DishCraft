@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import { ChefHat } from 'lucide-react';
+import { useState } from 'react'
+import { ChefHat } from 'lucide-react'
 
 export function NavBar() {
-    const [isAnimating, setIsAnimating] = useState(false);
+    const [isAnimating, setIsAnimating] = useState(false)
 
     const handleClick = () => {
         setIsAnimating(true);
-        setTimeout(() => setIsAnimating(false), 600);
-    };
+        setTimeout(() => setIsAnimating(false), 600)
+    }
 
     return (
         <header className="border-b border-gray-200 p-6">
