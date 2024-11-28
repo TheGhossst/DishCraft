@@ -12,6 +12,8 @@ import { Recipe } from './components/Recipe'
 export function App() {
   const [ingredients, setIngredients] = useState<Ingredient[]>([])
   const [recipe, setRecipe] = useState<RecipeResponse | null>(null)
+  const [lastRequestTime, setLastRequestTime] = useState<number | null>(null);
+
 
   const handleAddIngredient = (ingredient: Ingredient) => {
     setIngredients([...ingredients, ingredient])
@@ -29,6 +31,12 @@ export function App() {
   }
 
   const generateRecipe = async () => {
+    const now = Date.now();
+    if (lastRequestTime && now - lastRequestTime < 30000) {
+      alert("Please wait before requesting another recipe.");
+      return;
+    }
+    setLastRequestTime(now);
     const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY)
 
     try {
