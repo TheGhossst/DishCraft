@@ -16,6 +16,9 @@ export default {
           '100%': { transform: 'rotate(360deg)' },
         },
       },
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+      },
     },
   },
   plugins: [],
