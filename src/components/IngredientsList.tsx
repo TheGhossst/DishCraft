@@ -3,9 +3,10 @@ import { X } from 'lucide-react'
 
 interface IngredientsListProps {
     ingredients: Ingredient[]
+    onRemove: (id: string) => void
 }
 
-export function IngredientsList({ ingredients }: IngredientsListProps) {
+export function IngredientsList({ ingredients, onRemove }: IngredientsListProps) {
     return (
         <div className="space-y-4">
             <div className=" bg-yellow-200 py-2 px-4 rounded-lg shadow-md transform transition-all duration-300 hover:scale-105 ">
@@ -13,8 +14,11 @@ export function IngredientsList({ ingredients }: IngredientsListProps) {
                 <ol className="space-y-2 pl-5 text-black-500">
                     {ingredients.map((ingredient) => (
                         <li key={ingredient.id} className="flex items-center justify-between">
-                            <span>• {ingredient.name}</span>
-                            <button className="bg-transparent text-gray-600 border-0 font-semibold py-2 px-2 rounded-lg hover:text-black hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 transition duration-300 ease-in-out">
+                            <span className = "font-inter text-mg">• {ingredient.name}</span>
+                            <button 
+                                className="bg-transparent text-gray-600 border-0 font-semibold py-2 px-2 rounded-lg hover:text-black hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-400 transition duration-300 ease-in-out"
+                                onClick={() => onRemove(ingredient.id)}
+                            >
                                 <X className="h-4 w-4" />
                                 <span className="sr-only">Remove {ingredient.name}</span>
                             </button>
